@@ -1,7 +1,9 @@
+import Users from '@/containers/Users/Users'
+
 export default function Home() {
   return (
     <div>
-      <p>Dasasdhboard</p>
+      <Users />
     </div>
   )
 }
