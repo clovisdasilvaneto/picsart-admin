@@ -2,7 +2,7 @@
 
 import React from 'react'
 import UserList from './components/UserList/UserList'
-import { mockData } from './constants'
+import { mockUserData } from './constants'
 import useSearch from '@/hooks/useSearch/useSearch'
 import { TUser } from './types'
 import useSort from '@/hooks/useSort'
@@ -11,7 +11,7 @@ import Pagination from '@/components/Pagination'
 import Topbar from '@/components/TopBar'
 
 function Users() {
-  const { paginatedData, page, rowsPerPage, onPageChange, onRowsPerPageChange } = usePagination<TUser>(mockData)
+  const { paginatedData, page, rowsPerPage, onPageChange, onRowsPerPageChange } = usePagination<TUser>(mockUserData)
   const { results, search, onSearch } = useSearch(paginatedData, 'name')
   const { sortBy, sortedData, onSortBy } = useSort(results)
 
@@ -22,7 +22,7 @@ function Users() {
       <UserList users={sortedData} sortBy={sortBy} onSort={onSortBy} />
 
       <Pagination
-        count={mockData.length}
+        count={mockUserData.length}
         page={page}
         rowsPerPage={rowsPerPage}
         onPageChange={onPageChange}

@@ -19,47 +19,50 @@ ageDate.setFullYear(1980)
 const users = [
   {
     name: 'Clóvis da silva neto',
-    id: Date.now().toString(),
     age: ageOneDate.toUTCString(),
+    address: 'Postdamerplatz 38a, Berlin, Germany',
   },
   {
     name: 'Nevinha da jr',
-    id: Date.now().toString(),
     age: ageTwoDate.toUTCString(),
+    address: 'Postdamerplatz 38a, Berlin, Germany',
   },
   {
     name: 'Lucas bronks nine',
-    id: Date.now().toString(),
     age: ageThree.toUTCString(),
+    address: 'Postdamerplatz 38a, Berlin, Germany',
   },
   {
     name: 'Marley aparecida',
-    id: Date.now().toString(),
     age: ageTwoDate.toUTCString(),
+    address: 'Postdamerplatz 38a, Berlin, Germany',
   },
   {
     name: 'Nuna Franka',
-    id: Date.now().toString(),
     age: ageThree.toUTCString(),
+    address: 'Postdamerplatz 38a, Berlin, Germany',
   },
   {
     name: 'Amarildo júnior',
-    id: Date.now().toString(),
     age: ageDate.toUTCString(),
+    address: 'Postdamerplatz 38a, Berlin, Germany',
   },
   {
     name: 'Noronha mariney',
-    id: Date.now().toString(),
     age: ageDate.toUTCString(),
+    address: 'Postdamerplatz 38a, Berlin, Germany',
   },
   {
     name: 'Júnior mea',
-    id: Date.now().toString(),
     age: ageTwoDate.toUTCString(),
+    address: 'Postdamerplatz 38a, Berlin, Germany',
   },
 ]
 
-export const mockData = Array.from({ length: 100 }).map((_v: unknown, index: number) => users[index % users.length])
+export const mockUserData = Array.from({ length: 100 }).map((_v: unknown, index: number) => ({
+  ...users[index % users.length],
+  id: index.toString(),
+}))
 
 export const sortOptions = [
   {

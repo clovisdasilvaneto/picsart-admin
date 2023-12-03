@@ -1,31 +1,33 @@
-import React, { forwardRef } from "react";
-import { motion, HTMLMotionProps } from "framer-motion";
+import React, { createContext } from 'react'
+import { motion, HTMLMotionProps, AnimationControls, AnimatePresence } from 'framer-motion'
+import { IPageTransitionProviderProps } from './types'
+import { usePathname } from 'next/navigation'
+import { transition } from './constants'
 
-type PageTransitionProps = HTMLMotionProps<"div">;
-type PageTransitionRef = React.ForwardedRef<HTMLDivElement>;
+type PageTransitionProps = HTMLMotionProps<'div'>
 
-function PageTransition(
-	{ children, ...rest }: PageTransitionProps,
-	ref: PageTransitionRef,
-) {
-	const exit = { opacity: 0 };
-	const inTheCenter = { opacity: 1 };
-	const initial = { opacity: 0 };
+function PageTransition({ children }: PageTransitionProps) {
+  const pathname = usePathname()
 
-	const transition = { duration: 0.6, ease: "easeInOut" };
-
-	return (
-		<motion.div
-			ref={ref}
-			initial={initial}
-			animate={inTheCenter}
-			exit={exit}
-			transition={transition}
-			{...rest}
-		>
-			{children}
-		</motion.div>
-	);
+  return (
+    <AnimatePresence mode="wait" initial={false} onExitComplete={() => window.scrollTo(0, 0)}>
+      <motion.div
+        key={pathname}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={transition}
+      >
+        {children}
+      </motion.div>
+    </AnimatePresence>
+  )
 }
 
-export default forwardRef(PageTransition);
+export const PageTransitionContext = createContext<AnimationControls | null>(null)
+
+export function PageTransitionProvider({ controls, children }: IPageTransitionProviderProps) {
+  return <PageTransitionContext.Provider value={controls}>{children}</PageTransitionContext.Provider>
+}
+
+export default PageTransition

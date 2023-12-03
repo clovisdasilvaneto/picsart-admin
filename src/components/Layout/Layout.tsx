@@ -3,6 +3,7 @@
 import React from 'react'
 import { LayoutWrapper, LayoutColumn } from './styled'
 import Menu from '@/components/Menu'
+import PageTransition from '@/infra/PageTransition/PageTransition'
 
 interface ILayoutProps {
   children: React.ReactNode
@@ -10,10 +11,13 @@ interface ILayoutProps {
 
 function Layout({ children }: ILayoutProps) {
   return (
-    <LayoutWrapper maxWidth="xl">
-      <Menu />
-      <LayoutColumn>{children}</LayoutColumn>
-    </LayoutWrapper>
+    <PageTransition>
+      <LayoutWrapper maxWidth="xl">
+        <Menu />
+
+        <LayoutColumn>{children}</LayoutColumn>
+      </LayoutWrapper>
+    </PageTransition>
   )
 }
 
