@@ -5,6 +5,10 @@ import styled from 'styled-components'
 export const LayoutWrapper = styled(Container)`
   margin-top: 10vh;
 
+  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.values.md}px) {
+    margin-top: 0;
+  }
+
   && {
     display: grid;
     grid-template-columns: 260px auto;
@@ -12,7 +16,7 @@ export const LayoutWrapper = styled(Container)`
 
     @media only screen and (max-width: ${({ theme }) => theme.breakpoints.values.md}px) {
       grid-template-columns: auto;
-      grid-row-gap: 2rem;
+      grid-row-gap: 0.5rem;
       padding: 0;
     }
   }

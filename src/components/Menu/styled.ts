@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import styled, { DefaultTheme, css } from 'styled-components'
 
-export const MenuWrapper = styled.ul`
+export const MenuWrapper = styled.ul<{ isOppened: boolean }>`
   list-style: none;
   margin: 0;
   padding: 0;
@@ -11,8 +11,19 @@ export const MenuWrapper = styled.ul`
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.breakpoints.values.md}px) {
-    display: none;
+    transition: ease-out 0.3s all;
+    overflow: hidden;
+
+    ${({ isOppened }) => `
+      opacity: ${isOppened ? 1 : 0};
+      visibility: ${isOppened ? 'visible' : 'hidden'};
+      max-height:${isOppened ? '400px' : 0};
+    `}
   }
+`
+
+export const MobileMenuIcon = styled.div`
+  padding: 2rem 2rem 0;
 `
 
 export const MenuThemeBox = styled(Box)`
@@ -26,6 +37,10 @@ export const MenuThemeBox = styled(Box)`
 
   button {
     margin-left: 1rem;
+  }
+
+  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.values.md}px) {
+    justify-content: flex-start;
   }
 `
 
