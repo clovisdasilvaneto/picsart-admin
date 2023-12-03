@@ -37,8 +37,8 @@ function Menu() {
 
   return (
     <>
-      <MobileMenuIcon onClick={toggleMobileMenu}>
-        <MenuIcon fontSize="large" />
+      <MobileMenuIcon>
+        <MenuIcon onClick={toggleMobileMenu} fontSize="large" />
       </MobileMenuIcon>
 
       <MenuWrapper isOppened={isOppened}>
