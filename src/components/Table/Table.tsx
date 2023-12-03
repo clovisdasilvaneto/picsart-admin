@@ -24,7 +24,11 @@ function Table<T>({ headers, data, onSort, identifier, sortBy, noDataText }: ITa
             {headers.map(({ label, key, sortable, sx }, index: number) => (
               <TableCell sortDirection={sortable && 'desc'} sx={sx} key={index}>
                 {sortable ? (
-                  <TableSortLabel active={sortBy == key} direction={sortable ? 'desc' : undefined} onClick={handleRequestSort(key)}>
+                  <TableSortLabel
+                    active={sortBy == key}
+                    direction={sortable ? 'desc' : undefined}
+                    onClick={handleRequestSort(key)}
+                  >
                     {label}
                   </TableSortLabel>
                 ) : (
