@@ -1,4 +1,7 @@
-const lightVariant = {
+import { PaletteOptions } from '@mui/material'
+
+const lightVariant: PaletteOptions = {
+  mode: 'light',
   primary: {
     main: '#218CDE',
   },

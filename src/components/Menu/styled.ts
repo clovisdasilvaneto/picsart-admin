@@ -1,3 +1,4 @@
+import { Box } from '@mui/material'
 import styled, { DefaultTheme, css } from 'styled-components'
 
 export const MenuWrapper = styled.ul`
@@ -14,14 +15,28 @@ export const MenuWrapper = styled.ul`
   }
 `
 
+export const MenuThemeBox = styled(Box)`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1;
+  padding: 2rem;
+  cursor: pointer;
+
+  button {
+    margin-left: 1rem;
+  }
+`
+
 const getActiveLinkCSS = ({ theme }: { theme: DefaultTheme }) => `
 
 	&, span {
-		color: ${theme.palette.common.white};
+		color: ${theme.palette.background.paper};
 	}
 
 	path {
-		stroke: ${theme.palette.common.white};
+		stroke: ${theme.palette.background.paper};
 	}
 
 	&:before {
@@ -71,7 +86,7 @@ export const MenuItem = styled.li<{ $active?: boolean }>`
       height: 100%;
       border-top-left-radius: 2rem;
       border-bottom-left-radius: 2rem;
-      background: ${({ theme }) => theme.palette.common.black};
+      background: ${({ theme }) => theme.palette.text.primary};
       left: 0;
       top: 0;
       transform: translateX(100%);

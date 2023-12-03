@@ -3,6 +3,7 @@ import ThemeProvider from '@/providers/Theme'
 
 import StyledServerRegister from '../infra/StyledServerRegister'
 import Layout from '../components/Layout'
+import ReactQueryProvider from '@/providers/ReactQuery'
 
 export const metadata: Metadata = {
   title: 'PicsArt Admin',
@@ -17,11 +18,13 @@ export default function RootLayout({ children }: IRootLayoutProps) {
   return (
     <html lang="en">
       <body>
-        <StyledServerRegister>
-          <ThemeProvider>
-            <Layout>{children}</Layout>
-          </ThemeProvider>
-        </StyledServerRegister>
+        <ReactQueryProvider>
+          <StyledServerRegister>
+            <ThemeProvider>
+              <Layout>{children}</Layout>
+            </ThemeProvider>
+          </StyledServerRegister>
+        </ReactQueryProvider>
       </body>
     </html>
   )

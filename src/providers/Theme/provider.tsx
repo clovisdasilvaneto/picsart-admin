@@ -1,27 +1,44 @@
 'use client'
 
-import React from 'react'
+import React, { useCallback } from 'react'
 
 import GlobalStyles from '@/theme/globals'
 import { ThemeProvider as MaterialTheme } from '@mui/material/styles'
-import theme from '@/theme'
+import { EThemeVariants } from '@/theme'
 import { CssBaseline } from '@mui/material'
 import { DefaultTheme, ThemeProvider } from 'styled-components'
+import getTheme from '@/theme'
 
-interface ThemeProviderComponentProps {
+interface IThemeProviderComponentProps {
   children: React.ReactNode
 }
 
-function ThemeProviderComponent({ children }: ThemeProviderComponentProps) {
-  return (
-    <MaterialTheme theme={theme}>
-      <ThemeProvider theme={theme as DefaultTheme}>
-        <CssBaseline />
-        <GlobalStyles />
+interface IThemeModeContext {
+  toggleThemeMode: () => void
+}
 
-        {children}
-      </ThemeProvider>
-    </MaterialTheme>
+export const themeModeContext = React.createContext<IThemeModeContext>({ toggleThemeMode: () => null })
+
+function ThemeProviderComponent({ children }: IThemeProviderComponentProps) {
+  const [mode, setMode] = React.useState<EThemeVariants>(EThemeVariants.LIGHT)
+
+  const toggleThemeMode = useCallback(() => {
+    setMode((prevMode) => (prevMode === EThemeVariants.LIGHT ? EThemeVariants.DARK : EThemeVariants.LIGHT))
+  }, [])
+
+  const theme = React.useMemo(() => getTheme(mode), [mode])
+
+  return (
+    <themeModeContext.Provider value={{ toggleThemeMode }}>
+      <MaterialTheme theme={theme}>
+        <ThemeProvider theme={theme as DefaultTheme}>
+          <CssBaseline />
+          <GlobalStyles />
+
+          {children}
+        </ThemeProvider>
+      </MaterialTheme>
+    </themeModeContext.Provider>
   )
 }
 

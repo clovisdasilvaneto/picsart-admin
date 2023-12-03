@@ -1,15 +1,20 @@
 import React from 'react'
-import { MenuItem, MenuWrapper } from './styled'
-import { Typography } from '@mui/material'
+import { MenuItem, MenuThemeBox, MenuWrapper } from './styled'
+import { Typography, IconButton } from '@mui/material'
 import Link from 'next/link'
 import { Layers, Person } from '@mui/icons-material'
 import { usePathname } from 'next/navigation'
 import MenuLinkItem from './MenuLink'
 
+import { Brightness4, Brightness7 } from '@mui/icons-material'
+import { useTheme } from 'styled-components'
+import { EThemeVariants } from '@/theme'
+import { themeModeContext } from '@/providers/Theme/provider'
+
 export const links = [
   {
     label: 'Dashboard',
-    url: '/dashboard',
+    url: '/',
     Icon: Layers,
   },
   {
@@ -21,6 +26,8 @@ export const links = [
 
 function Menu() {
   const pathname = usePathname()
+  const theme = useTheme()
+  const themeMode = React.useContext(themeModeContext)
 
   return (
     <MenuWrapper>
@@ -41,6 +48,13 @@ function Menu() {
           </Link>
         </MenuItem>
       ))}
+
+      <MenuThemeBox onClick={themeMode.toggleThemeMode}>
+        {theme.palette.mode} mode
+        <IconButton color="inherit">
+          {theme.palette.mode === EThemeVariants.DARK ? <Brightness7 /> : <Brightness4 />}
+        </IconButton>
+      </MenuThemeBox>
     </MenuWrapper>
   )
 }

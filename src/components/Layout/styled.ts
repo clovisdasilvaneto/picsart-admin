@@ -1,3 +1,4 @@
+import { EThemeVariants } from '@/theme'
 import { Container } from '@mui/material'
 import styled from 'styled-components'
 
@@ -18,7 +19,7 @@ export const LayoutWrapper = styled(Container)`
 `
 
 export const LayoutColumn = styled.div`
-  background: ${({ theme }) => theme.palette.common.white};
+  background: ${({ theme }) => (theme.palette.mode === EThemeVariants.DARK ? '#2a2a2a' : theme.palette.common.white)};
   border-radius: 2rem;
   box-shadow: 0px -5px 20px 0px rgba(0, 0, 0, 0.05);
   padding: 2rem;
