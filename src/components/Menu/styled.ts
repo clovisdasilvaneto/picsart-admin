@@ -24,6 +24,10 @@ export const MenuWrapper = styled.ul<{ isOppened: boolean }>`
 
 export const MobileMenuIcon = styled.div`
   padding: 2rem 2rem 0;
+  display: none;
+  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.values.md}px) {
+    display: block;
+  }
 `
 
 export const MenuThemeBox = styled(Box)`
